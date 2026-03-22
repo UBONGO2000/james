@@ -1,0 +1,69 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const creations = await getCollection("creations");
+  return creations.map((creation) => ({
+    params: { slug: creation.id },
+    props: { creation },
+  }));
+}
+
+const { creation } = Astro.props;
+const { Content } = await render(creation);
+
+const TYPE_LABELS: Record<string, string> = {
+  flyer: "Flyer",
+  brochure: "Brochure",
+  affiche: "Affiche",
+  packaging: "Packaging",
+  identite: "Identité visuelle",
+  logo: "Logo",
+  web: "Web / Digital",
+  autre: "Autre",
+};
+
+const typeLabel = TYPE_LABELS[creation.data.type] ?? creation.data.type;
+---
+
+<Layout title={`${creation.data.title} — Jean Dupont`}>
+  <a href="/creations" class="detail-back">
+    &larr; Retour aux créations
+  </a>
+
+  <img
+    class="detail-image"
+    src={creation.data.image}
+    alt={creation.data.title}
+  />
+
+  <div class="page-header" style="margin-bottom: 0;">
+    <h1>{creation.data.title}</h1>
+  </div>
+
+  <div class="detail-meta">
+    <span class="detail-type">{typeLabel}</span>
+    <button
+      class="detail-likes like-btn"
+      data-slug={creation.id}
+      data-base-likes={creation.data.likes}
+      aria-label="Aimer cette création"
+    >
+      <svg class="like-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+      <span class="like-count">{creation.data.likes}</span>
+    </button>
+  </div>
+
+  {creation.data.description && (
+    <div class="detail-body">
+      <p>{creation.data.description}</p>
+    </div>
+  )}
+
+  <div class="detail-body" style="margin-top: 1.5rem;">
+    <Content />
+  </div>
+</Layout>

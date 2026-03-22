@@ -1,0 +1,71 @@
+---
+import { getCollection } from "astro:content";
+import CreationCard from "../components/CreationCard.astro";
+import EventCard from "../components/EventCard.astro";
+import Layout from "../layouts/Layout.astro";
+
+const allCreations = await getCollection("creations");
+const latestCreations = allCreations.slice(0, 3);
+
+const allEvents = await getCollection("events");
+const today = new Date().toISOString().split("T")[0];
+const upcomingEvents = allEvents
+  .filter((e) => e.data.date >= today)
+  .sort((a, b) => a.data.date.localeCompare(b.data.date))
+  .slice(0, 2);
+---
+
+<Layout>
+  <section class="hero">
+    <span class="hero-label">Designer Graphique</span>
+    <h1>Donner vie<br />à vos idées</h1>
+    <p>
+      Créations visuelles, identités de marque et expériences graphiques
+      uniques — du concept à la réalisation.
+    </p>
+    <div class="hero-actions">
+      <a href="/creations" class="btn btn-primary">Voir les créations</a>
+      <a href="/contact" class="btn btn-outline">Me contacter</a>
+    </div>
+  </section>
+
+  {latestCreations.length > 0 && (
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Dernières créations</h2>
+        <a href="/creations" class="section-link">Tout voir</a>
+      </div>
+      <div class="gallery">
+        {latestCreations.map((creation) => (
+          <CreationCard
+            title={creation.data.title}
+            image={creation.data.image}
+            type={creation.data.type}
+            description={creation.data.description}
+            likes={creation.data.likes}
+            slug={creation.id}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+
+  {upcomingEvents.length > 0 && (
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Prochains événements</h2>
+        <a href="/evenements" class="section-link">Tout voir</a>
+      </div>
+      <div class="event-list">
+        {upcomingEvents.map((event) => (
+          <EventCard
+            title={event.data.title}
+            date={event.data.date}
+            description={event.data.description}
+            affiche={event.data.affiche}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+</Layout>

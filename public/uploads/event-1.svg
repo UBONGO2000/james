@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#1b2838"/>
+  <rect x="120" y="80" width="560" height="440" rx="8" fill="none" stroke="#4fc3f7" stroke-width="1"/>
+  <rect x="150" y="110" width="200" height="200" rx="4" fill="#ff7043" opacity="0.6"/>
+  <rect x="370" y="110" width="140" height="95" rx="4" fill="#81c784" opacity="0.5"/>
+  <rect x="370" y="215" width="140" height="95" rx="4" fill="#ba68c8" opacity="0.5"/>
+  <rect x="530" y="110" width="120" height="200" rx="4" fill="#4fc3f7" opacity="0.4"/>
+  <text x="400" y="400" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#fff" text-anchor="middle">COULEURS URBAINES</text>
+  <text x="400" y="440" font-family="Arial, sans-serif" font-size="16" fill="#4fc3f7" text-anchor="middle">EXPOSITION COLLECTIVE</text>
+  <text x="400" y="480" font-family="Arial, sans-serif" font-size="14" fill="#888" text-anchor="middle">15 Avril 2026 — Galerie Centrale, Paris</text>
+</svg>

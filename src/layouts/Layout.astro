@@ -1,0 +1,357 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Portfolio — Designer Graphique",
+  description = "Designer graphique indépendant. Créations visuelles, identités de marque et expériences graphiques uniques.",
+} = Astro.props;
+const currentPath = Astro.url.pathname;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+    <script is:inline>
+      (function () {
+        var saved = localStorage.getItem("theme");
+        var theme =
+          saved ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/" class="logo">Jean Dupont</a>
+      <div class="header-right">
+        <nav class="site-nav" id="site-nav">
+          <a href="/" class:list={[{ active: currentPath === "/" }]}>Accueil</a>
+          <a href="/creations" class:list={[{ active: currentPath.startsWith("/creations") }]}>Créations</a>
+          <a href="/evenements" class:list={[{ active: currentPath === "/evenements" }]}>Événements</a>
+          <a href="/a-propos" class:list={[{ active: currentPath === "/a-propos" }]}>À propos</a>
+          <a href="/contact" class:list={[{ active: currentPath === "/contact" }]}>Contact</a>
+        </nav>
+        <div class="site-nav-backdrop" id="nav-backdrop"></div>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Changer de thème">
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="logo">Jean Dupont</span>
+          <p>Designer graphique indépendant basé à Paris. Spécialisé en identité visuelle, print et design digital.</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="/">Accueil</a></li>
+              <li><a href="/creations">Créations</a></li>
+              <li><a href="/evenements">Événements</a></li>
+              <li><a href="/a-propos">À propos</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Réseaux</h4>
+            <ul>
+              <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+              <li><a href="https://behance.net" target="_blank" rel="noopener">Behance</a></li>
+              <li><a href="https://dribbble.com" target="_blank" rel="noopener">Dribbble</a></li>
+              <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; {year} Jean Dupont. Tous droits réservés.</span>
+        <div class="social-links">
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="https://behance.net" target="_blank" rel="noopener" aria-label="Behance">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12h6.5a3 3 0 1 0 0-6H1v14h6.5a3 3 0 1 0 0-6"></path>
+              <path d="M18 6h5v14h-5a4 4 0 1 1 0-8h1a4 4 0 1 1 0-8"></path>
+            </svg>
+          </a>
+          <a href="https://dribbble.com" target="_blank" rel="noopener" aria-label="Dribbble">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M19.13 5.09C15.22 9.14 10 10.44 2.25 10.94"></path>
+              <path d="M21.75 12.84c-6.62-1.41-12.14 1-16.38 6.32"></path>
+              <path d="M8.56 2.75c4.37 6 6 12 6.93 18.9"></path>
+            </svg>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script is:inline>
+      (function () {
+        var toggle = document.getElementById("theme-toggle");
+        if (!toggle) return;
+
+        toggle.addEventListener("click", function () {
+          var html = document.documentElement;
+          var current = html.getAttribute("data-theme");
+          var next = current === "dark" ? "light" : "dark";
+          html.style.transition =
+            "background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.5s cubic-bezier(0.16, 1, 0.3, 1)";
+          html.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+        });
+      })();
+    </script>
+
+    <script is:inline>
+      (function () {
+        var STORAGE_KEY = "portfolio_likes";
+
+        function getLikedState() {
+          try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+          } catch (e) {
+            return {};
+          }
+        }
+
+        function saveLikedState(state) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function initLikes() {
+          var state = getLikedState();
+          var buttons = document.querySelectorAll(".like-btn");
+
+          buttons.forEach(function (btn) {
+            var slug = btn.dataset.slug;
+            var baseLikes = parseInt(btn.dataset.baseLikes, 10) || 0;
+            var countEl = btn.querySelector(".like-count");
+            var entry = state[slug];
+            var liked = entry && entry.liked;
+            var total = baseLikes + (liked ? 1 : 0);
+
+            if (countEl) countEl.textContent = total;
+            if (liked) {
+              btn.classList.add("liked");
+            } else {
+              btn.classList.remove("liked");
+            }
+
+            if (!btn._likesInit) {
+              btn._likesInit = true;
+              btn.addEventListener("click", function () {
+                var s = getLikedState();
+                var current = s[slug] && s[slug].liked;
+                if (current) {
+                  delete s[slug];
+                  btn.classList.remove("liked");
+                  if (countEl) countEl.textContent = baseLikes;
+                } else {
+                  s[slug] = { liked: true };
+                  btn.classList.add("liked");
+                  if (countEl) countEl.textContent = baseLikes + 1;
+                }
+                saveLikedState(s);
+              });
+            }
+          });
+        }
+
+        document.addEventListener("DOMContentLoaded", initLikes);
+        document.addEventListener("astro:page-load", initLikes);
+      })();
+    </script>
+
+    <script is:inline>
+      (function () {
+        /* ── Mobile navigation ── */
+        var navToggle = document.getElementById("nav-toggle");
+        var nav = document.getElementById("site-nav");
+        var backdrop = document.getElementById("nav-backdrop");
+
+        if (!navToggle || !nav || !backdrop) return;
+
+        function openNav() {
+          nav.classList.add("open");
+          backdrop.classList.add("visible");
+          navToggle.setAttribute("aria-expanded", "true");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeNav() {
+          nav.classList.remove("open");
+          backdrop.classList.remove("visible");
+          navToggle.setAttribute("aria-expanded", "false");
+          document.body.style.overflow = "";
+        }
+
+        navToggle.addEventListener("click", function () {
+          if (nav.classList.contains("open")) {
+            closeNav();
+          } else {
+            openNav();
+          }
+        });
+
+        backdrop.addEventListener("click", closeNav);
+
+        var navLinks = nav.querySelectorAll("a");
+        navLinks.forEach(function (link) {
+          link.addEventListener("click", closeNav);
+        });
+
+        /* ── Scroll reveal animations ── */
+        function initReveal() {
+          var revealEls = document.querySelectorAll(
+            ".reveal, .reveal-stagger, .hero, .section, .page-header, .about-layout, .contact-layout, .detail-image, .detail-body"
+          );
+
+          if (!revealEls.length) return;
+
+          var observer = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("revealed");
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
+          );
+
+          revealEls.forEach(function (el) {
+            if (el.classList.contains("hero")) {
+              el.classList.add("reveal");
+            } else if (el.classList.contains("section")) {
+              el.classList.add("reveal");
+            } else if (el.classList.contains("page-header")) {
+              el.classList.add("reveal");
+            } else if (
+              el.classList.contains("about-layout") ||
+              el.classList.contains("contact-layout")
+            ) {
+              el.classList.add("reveal");
+            } else if (el.classList.contains("detail-image")) {
+              el.classList.add("reveal");
+            } else if (el.classList.contains("detail-body")) {
+              el.classList.add("reveal");
+            }
+            observer.observe(el);
+          });
+
+          /* Staggered gallery cards */
+          var galleries = document.querySelectorAll(".gallery, .event-list");
+          galleries.forEach(function (gallery) {
+            gallery.classList.add("reveal-stagger");
+            observer.observe(gallery);
+          });
+        }
+
+        document.addEventListener("DOMContentLoaded", initReveal);
+        document.addEventListener("astro:page-load", initReveal);
+
+        /* ── Smooth image loading ── */
+        function initImageLoad() {
+          var images = document.querySelectorAll(
+            ".card-image-wrap img, .event-image, .about-image, .detail-image"
+          );
+          images.forEach(function (img) {
+            if (img.complete) {
+              img.style.opacity = "1";
+            } else {
+              img.style.opacity = "0";
+              img.style.transition = "opacity 0.5s ease";
+              img.addEventListener("load", function () {
+                img.style.opacity = "1";
+              });
+            }
+          });
+        }
+
+        document.addEventListener("DOMContentLoaded", initImageLoad);
+        document.addEventListener("astro:page-load", initImageLoad);
+
+        /* ── Header shrink on scroll ── */
+        var header = document.querySelector(".site-header");
+        var lastScroll = 0;
+
+        window.addEventListener(
+          "scroll",
+          function () {
+            var scrollY = window.scrollY;
+            if (scrollY > 80) {
+              header.style.borderBottomColor = "var(--c-border)";
+            } else {
+              header.style.borderBottomColor = "var(--c-border-light)";
+            }
+            lastScroll = scrollY;
+          },
+          { passive: true }
+        );
+      })();
+    </script>
+  </body>
+</html>

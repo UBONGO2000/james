@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#f5f5f0"/>
+  <rect x="100" y="80" width="600" height="440" rx="4" fill="#fff" stroke="#ddd" stroke-width="1"/>
+  <text x="180" y="150" font-family="Georgia, serif" font-size="28" fill="#333">Résidence</text>
+  <text x="180" y="190" font-family="Georgia, serif" font-size="36" fill="#333" font-style="italic">Les Jardins</text>
+  <rect x="400" y="100" width="280" height="200" rx="4" fill="#a8d5a2" opacity="0.3"/>
+  <line x1="180" y1="260" x2="600" y2="260" stroke="#ddd" stroke-width="1"/>
+  <text x="180" y="310" font-family="Arial, sans-serif" font-size="14" fill="#666">Programme immobilier de prestige</text>
+  <text x="180" y="340" font-family="Arial, sans-serif" font-size="14" fill="#666">Paris 16ème — À partir de 850 000€</text>
+  <text x="180" y="400" font-family="Arial, sans-serif" font-size="12" fill="#999">24 pages — Brochure commerciale</text>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#2d2d2d"/>
+  <circle cx="400" cy="220" r="120" fill="none" stroke="#f4a460" stroke-width="2"/>
+  <circle cx="400" cy="220" r="80" fill="none" stroke="#f4a460" stroke-width="1.5"/>
+  <circle cx="400" cy="220" r="40" fill="#f4a460" opacity="0.3"/>
+  <text x="400" y="400" font-family="Georgia, serif" font-size="48" fill="#f4a460" text-anchor="middle" font-style="italic">Jazz au Parc</text>
+  <text x="400" y="450" font-family="Arial, sans-serif" font-size="18" fill="#ddd" text-anchor="middle">SOIRÉE EN PLEIN AIR</text>
+  <text x="400" y="490" font-family="Arial, sans-serif" font-size="16" fill="#888" text-anchor="middle">Samedi 28 Février 2026 — 20h</text>
+</svg>

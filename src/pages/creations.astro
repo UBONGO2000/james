@@ -1,0 +1,106 @@
+---
+import { getCollection } from "astro:content";
+import CreationCard from "../components/CreationCard.astro";
+import Layout from "../layouts/Layout.astro";
+
+const creations = await getCollection("creations");
+
+const TYPE_LABELS: Record<string, string> = {
+  all: "Tous",
+  flyer: "Flyers",
+  brochure: "Brochures",
+  affiche: "Affiches",
+  packaging: "Packaging",
+  identite: "Identité",
+  logo: "Logos",
+  web: "Web / Digital",
+  autre: "Autre",
+};
+
+const typesInUse = [...new Set(creations.map((c) => c.data.type))];
+const filterTypes = ["all", ...typesInUse];
+---
+
+<Layout title="Créations — Portfolio">
+  <div class="page-header">
+    <h1>Créations</h1>
+    <p>Découvrez l'ensemble de mes projets graphiques, classés par catégorie.</p>
+  </div>
+
+  <div class="filter-bar" id="filter-bar">
+    {filterTypes.map((type) => (
+      <button
+        class:list={["filter-tag", { active: type === "all" }]}
+        data-filter={type}
+      >
+        {TYPE_LABELS[type] ?? type}
+      </button>
+    ))}
+  </div>
+
+  <div class="gallery" id="gallery">
+    {creations.map((creation) => (
+      <div class="card-wrapper" data-type={creation.data.type}>
+        <CreationCard
+          title={creation.data.title}
+          image={creation.data.image}
+          type={creation.data.type}
+          description={creation.data.description}
+          likes={creation.data.likes}
+          slug={creation.id}
+        />
+      </div>
+    ))}
+  </div>
+</Layout>
+
+<script is:inline>
+  (function () {
+    function initFilter() {
+      var filterBar = document.getElementById("filter-bar");
+      var gallery = document.getElementById("gallery");
+
+      if (!filterBar || !gallery) return;
+
+      var tags = filterBar.querySelectorAll(".filter-tag");
+      var cards = gallery.querySelectorAll(".card-wrapper");
+
+      tags.forEach(function (tag) {
+        tag.addEventListener("click", function () {
+          var filter = tag.dataset.filter;
+
+          tags.forEach(function (t) { t.classList.remove("active"); });
+          tag.classList.add("active");
+
+          cards.forEach(function (card, index) {
+            var type = card.dataset.type;
+            var shouldShow = filter === "all" || type === filter;
+
+            if (shouldShow) {
+              card.style.display = "";
+              card.style.opacity = "0";
+              card.style.transform = "translateY(12px)";
+              (function (i) {
+                requestAnimationFrame(function () {
+                  card.style.transition = "opacity 0.35s ease " + (i * 40) + "ms, transform 0.35s ease " + (i * 40) + "ms";
+                  card.style.opacity = "1";
+                  card.style.transform = "translateY(0)";
+                });
+              })(index);
+            } else {
+              card.style.transition = "opacity 0.2s ease, transform 0.2s ease";
+              card.style.opacity = "0";
+              card.style.transform = "translateY(8px)";
+              setTimeout(function () {
+                card.style.display = "none";
+              }, 200);
+            }
+          });
+        });
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", initFilter);
+    document.addEventListener("astro:page-load", initFilter);
+  })();
+</script>

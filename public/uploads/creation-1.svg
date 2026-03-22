@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#1a1a2e"/>
+  <rect x="180" y="120" width="440" height="80" rx="4" fill="#e94560"/>
+  <text x="400" y="175" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#fff" text-anchor="middle">FESTIVAL</text>
+  <rect x="250" y="240" width="300" height="40" rx="4" fill="#0f3460"/>
+  <text x="400" y="268" font-family="Arial, sans-serif" font-size="22" fill="#eee" text-anchor="middle">MUSIQUE INDÉPENDANTE</text>
+  <line x1="200" y1="340" x2="600" y2="340" stroke="#e94560" stroke-width="2"/>
+  <text x="400" y="400" font-family="Georgia, serif" font-size="28" fill="#ccc" text-anchor="middle">15 — 17 Mars 2026</text>
+  <text x="400" y="450" font-family="Arial, sans-serif" font-size="18" fill="#888" text-anchor="middle">Parc des Expositions — Paris</text>
+</svg>

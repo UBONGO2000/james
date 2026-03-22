@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import EventCard from "../components/EventCard.astro";
+import Layout from "../layouts/Layout.astro";
+
+const allEvents = await getCollection("events");
+const today = new Date().toISOString().split("T")[0];
+const upcomingEvents = allEvents
+  .filter((e) => e.data.date >= today)
+  .sort((a, b) => a.data.date.localeCompare(b.data.date));
+---
+
+<Layout title="Événements — Portfolio">
+  <div class="page-header">
+    <h1>Événements</h1>
+    <p>Retrouvez-moi lors de ces événements et expositions à venir.</p>
+  </div>
+
+  {upcomingEvents.length > 0 ? (
+    <div class="event-list">
+      {upcomingEvents.map((event) => (
+        <EventCard
+          title={event.data.title}
+          date={event.data.date}
+          description={event.data.description}
+          affiche={event.data.affiche}
+        />
+      ))}
+    </div>
+  ) : (
+    <p style="color: var(--c-text-muted); text-align: center; padding: 4rem 0;">
+      Aucun événement à venir pour le moment. Revenez bientôt !
+    </p>
+  )}
+</Layout>

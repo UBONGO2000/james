@@ -1,0 +1,26 @@
+---
+interface Props {
+  title: string;
+  date: string;
+  description?: string;
+  affiche: string;
+}
+
+const { title, date, description, affiche } = Astro.props;
+
+const formattedDate = new Date(date).toLocaleDateString("fr-FR", {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<div class="event-card">
+  <img class="event-image" src={affiche} alt={title} loading="lazy" />
+  <div class="event-body">
+    <span class="event-date">{formattedDate}</span>
+    <h3>{title}</h3>
+    {description && <p>{description}</p>}
+  </div>
+</div>
